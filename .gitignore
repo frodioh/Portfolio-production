@@ -1,0 +1,21 @@
+# Numerous always-ignore extensions
+*.bak
+*.diff
+*.err
+*.exe
+*.log
+*.orig
+*.rej
+*.sass-cache
+*.swo
+*.swp
+*.vi
+*~
+
+# Folders to ignore
+.git
+.idea
+
+# Node.JS
+node_modules
+npm-debug.log

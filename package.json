@@ -1,0 +1,9 @@
+{
+  "name": "Portfolio",
+  "version": "1.0.0",
+  "author": "Rodion Fedotov",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "4.14.0"
+  }
+}
