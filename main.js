@@ -1,23 +1,26 @@
 //Модули
-var fs = require('fs'), // Модуль для работы с файловой системой
-    path = require('path'), // Модуль для работы с путями
-    mime = require('mime'), // Модуль для работы с MIME-типами
+var fs = require('fs'),
+    path = require('path'),
+    mime = require('mime'),
     express = require('express');
 //Создание сервера
 var app = express();
 //Обработка get запроса
 app.get('/*', function(req, res) {
-  //Получение MIME-типа и кодировки
-  var mimeType = mime.lookup(req.url);
-  var charset = mime.charsets.lookup(mimeType);
-  //Установка заголовков
-  res.setHeader('content-type', mimeType + '; charset=' + charset);
+  //Сохранение имени файла
   var fileName = './site' + req.url;
-  if (fs.existsSync(fileName)) {
+  if(fileName === './site/') fileName = fileName + 'index.html';
+  //Получение MIME-типа
+  var mimeType = mime.lookup(fileName),
+      charset = mime.charsets.lookup(mimeType);
+  //Установка заголовков
+  res.setHeader('Content-Type', mimeType + '; charset=' + charset);
+  console.log(fileName);
+  if(fs.existsSync(fileName)) {
     var content = fs.readFileSync(fileName, {encoding: charset});
     res.write(content);
   } else {
-    var content = fs.readFileSync('./site/404.html', {encoding: charset});
+    var content = fs.readFileSync('./site/404.html', {encoding: 'utf8'});
     res.status(404);
     res.write(content);
   }
